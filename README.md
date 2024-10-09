@@ -146,6 +146,34 @@ or your own code where you want to use the results from optillm. You can use it 
 - `B` is the optillm service (running directly or in a docker container) that will send requests to the `base_url`.
 - `C` is any service providing an OpenAI API compatible chat completions endpoint. 
 
+## Running with Arcee-Atlas
+
+Please follow the steps in the [Installation](#installation) section to clone and set up the optillm repository.
+
+To integrate with Arcee-Atlas, follow these steps:
+
+1. **Set up the Environment Variable**  
+   First, set the `OPENAI_API_KEY` environment variable to a placeholder value since Arcee-Atlas uses a custom endpoint:
+   ```bash
+   export OPENAI_API_KEY="no_key"
+   ```
+
+2. **Start the optillm Proxy with Arcee-Atlas Endpoint**  
+   Launch the optillm proxy by providing the Arcee-Atlas endpoint URL as a parameter:
+   ```bash
+   python optillm.py --base_url http://47.47.180.6:11375/v1
+   ```
+
+3. **Run Check Script**  
+   Run the `explore_with_arcee_atlas.py` script to verify the integration. Ensure you pass any necessary environment variables for the inference method.
+
+   You can also specify an approach and a custom message. For instance:
+   ```bash
+   python explore_with_arcee_atlas.py --approach mcts --message "What is larger 9.9 or 9.11? Reason step by step before providing any answer."
+   ```
+
+Different inference optimization techniques that can be used with Arcee-Atlas can be found in the [Implemented techniques](#implemented-techniques) section below.
+
 ## Implemented techniques
 
 | Approach                | Slug               | Description                                                                                    |

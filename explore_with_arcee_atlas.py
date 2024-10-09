@@ -1,4 +1,3 @@
-import os
 import argparse
 from openai import OpenAI
 
@@ -11,8 +10,9 @@ def main():
     optillm_approach = args.approach
     message = args.message
 
-    OPENAI_KEY = os.environ.get("OPENAI_API_KEY")
-    OPENAI_BASE_URL = "http://47.47.180.6:11375/v1"
+    # This is a dummy key that is compatible with the openai encription. 
+    OPENAI_KEY = "dummy key that follows the openai encription"
+    OPENAI_BASE_URL = "http://localhost:8000/v1"
     client = OpenAI(api_key=OPENAI_KEY, base_url=OPENAI_BASE_URL)
 
     response = client.chat.completions.create(

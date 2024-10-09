@@ -1,5 +1,4 @@
 import os
-import sys
 import argparse
 from openai import OpenAI
 

@@ -49,7 +49,10 @@ def get_config():
     # OpenAI, Azure, or LiteLLM API configuration
     if os.environ.get("OPENAI_API_KEY"):
         API_KEY = os.environ.get("OPENAI_API_KEY")
-        default_client = OpenAI(api_key=API_KEY)
+        if os.environ.get("OPTILLM_BASE_URL"):
+            default_client = OpenAI(api_key=API_KEY, base_url=os.environ.get("OPTILLM_BASE_URL"))
+        else:
+            default_client = OpenAI(api_key=API_KEY)
     elif os.environ.get("AZURE_OPENAI_API_KEY"):
         API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
         API_VERSION = os.environ.get("AZURE_API_VERSION")

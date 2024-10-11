@@ -198,11 +198,6 @@ While this method is currently working using PyTorch, it would be beneficial in 
 python explore_with_arcee_atlas.py --approach entropy_spike_beam_plugin --message "What is larger 9.9 or 9.11? Reason step by step before providing any answer."
 ```
 
----
-
-This approach provides a way to experiment with different sampling methods using available resources while acknowledging the current limitations with APIs and efficient backends.
-
-
 ## Implemented techniques
 
 | Approach                | Slug               | Description                                                                                    |

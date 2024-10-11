@@ -185,11 +185,11 @@ Implementing advanced sampling techniques like entropy-based beam search is chal
 
 - **Efficiency with Backends:** Efficient inference backends like **VLLM** and **llama.cpp** are optimized for performance but may not support custom sampling methods or provide easy access to logits. Implementing custom sampling techniques in these backends is complex and may impact their performance benefits.
 
-Future plans include updating the backend to support access to logits, potentially moving away from PyTorch to achieve this. Exploring integration with backends like VLLM is also considered, though it presents additional challenges due to their optimization for specific use cases and lack of support for custom sampling methods.
+To assist with research and experimentation when using a personal GPU (e.g., when running your proxy server in the cloud), a plugin has been implemented to test different sampling methods like entropy-based beam search. This plugin method is currently the best option and is working effectively. It uses PyTorch to load the model locally, providing access to model internals such as logits.
 
-Further details and discussions can be found at [Issue #59 in the OptiLLM repository](https://github.com/codelion/optillm/issues/59).
+**Important Note:** When using this method, it's essential to run the proxy server on a GPU to ensure acceptable performance; otherwise, it would be freaking slow.
 
-To help our research and experimentation when using a personal GPU (when you run your proxy machine in a cloud), a plugin has been implemented to test different sampling methods (e.g., entropy-based methods). This allows testing these methods locally despite the challenges with existing APIs and backends.
+While this method is currently working using PyTorch, it would be beneficial in the future to move away from PyTorch to more efficient backends that still allow access to model internals.
 
 
 **Example Usage:**
@@ -197,6 +197,10 @@ To help our research and experimentation when using a personal GPU (when you run
 ```bash
 python explore_with_arcee_atlas.py --approach entropy_spike_beam_plugin --message "What is larger 9.9 or 9.11? Reason step by step before providing any answer."
 ```
+
+---
+
+This approach provides a way to experiment with different sampling methods using available resources while acknowledging the current limitations with APIs and efficient backends.
 
 
 ## Implemented techniques

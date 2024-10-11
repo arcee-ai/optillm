@@ -175,7 +175,7 @@ To integrate with Arcee-Atlas, follow these steps:
 Different inference optimization techniques that can be used with Arcee-Atlas can be found in the [Implemented techniques](#implemented-techniques) section below.
 
 
-## Running Sampling Methods as Plugins [WIP]
+## Running Sampling Methods as Plugins [We need to access logits!!]
 
 Implementing advanced sampling techniques like entropy-based beam search is challenging due to efficiency concerns and limitations in accessing model internals.
 

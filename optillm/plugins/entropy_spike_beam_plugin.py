@@ -5,7 +5,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from typing import Tuple, List, Dict
 
-SLUG = "entropy_spike_beam"
+SLUG = "entropy_spike_beam_plugin"
 
 # Global variables for caching
 _cached_model_name = None
@@ -19,24 +19,40 @@ def get_device():
     else:
         return torch.device("cpu")
 
-def run(system_prompt: str, initial_query: str, client=None, model_name=None) -> Tuple[str, int]:
+def run(system_prompt: str, initial_query: str, client=None, model=None) -> Tuple[str, int]:
     global _cached_model_name, _cached_tokenizer, _cached_model
-
-    if model_name is None:
-        model_name = "your-default-model-name"  # Replace with your default model name
 
     device = get_device()
 
-    # Use a lock to ensure thread-safe access to the model and tokenizer
-    with _model_lock:
-        if _cached_model_name != model_name:
-            # Load the model and tokenizer
-            _cached_tokenizer = AutoTokenizer.from_pretrained(model_name)
-            _cached_model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
-            _cached_model_name = model_name
+    # If model and tokenizer are provided by the proxy, use them
+    if model != "None":
+        # Assuming that the model is a dictionary containing both 'model' and 'tokenizer'
+        proxy_model = model.get('model')
+        proxy_tokenizer = model.get('tokenizer')
+        if proxy_model is not None and proxy_tokenizer is not None:
+            # Use the provided model and tokenizer
+            model = proxy_model.to(device)
+            tokenizer = proxy_tokenizer
+        else:
+            # If the provided model doesn't include tokenizer, load default
+            model = proxy_model.to(device)
+            tokenizer = AutoTokenizer.from_pretrained(model.config._name_or_path)
+    else:
 
-    tokenizer = _cached_tokenizer
-    model = _cached_model
+        print("**********##########*********",model, "################")
+        # Load the default model and tokenizer if not provided
+        model_name = "arcee-ai/Llama-3.1-SuperNova-Lite"  # Replace with your default model name
+
+        # Use a lock to ensure thread-safe access to the model and tokenizer
+        with _model_lock:
+            if _cached_model_name != model_name:
+                # Load the model and tokenizer
+                _cached_tokenizer = AutoTokenizer.from_pretrained(model_name)
+                _cached_model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
+                _cached_model_name = model_name
+
+        tokenizer = _cached_tokenizer
+        model = _cached_model
 
     # Prepare messages
     messages = [

@@ -174,6 +174,31 @@ To integrate with Arcee-Atlas, follow these steps:
 
 Different inference optimization techniques that can be used with Arcee-Atlas can be found in the [Implemented techniques](#implemented-techniques) section below.
 
+
+## Running Sampling Methods as Plugins [WIP]
+
+Implementing advanced sampling techniques like entropy-based beam search is challenging due to efficiency concerns and limitations in accessing model internals.
+
+**Key Challenges:**
+
+- **Access to Logits:** APIs like the OpenAI Chat Completion API abstract away the underlying model, providing high-level interfaces without exposing internals like logits or token probabilities. This makes it difficult to implement sampling methods that rely on logits.
+
+- **Efficiency with Backends:** Efficient inference backends like **VLLM** and **llama.cpp** are optimized for performance but may not support custom sampling methods or provide easy access to logits. Implementing custom sampling techniques in these backends is complex and may impact their performance benefits.
+
+Future plans include updating the backend to support access to logits, potentially moving away from PyTorch to achieve this. Exploring integration with backends like VLLM is also considered, though it presents additional challenges due to their optimization for specific use cases and lack of support for custom sampling methods.
+
+Further details and discussions can be found at [Issue #59 in the OptiLLM repository](https://github.com/codelion/optillm/issues/59).
+
+To help our research and experimentation when using a personal GPU (when you run your proxy machine in a cloud), a plugin has been implemented to test different sampling methods (e.g., entropy-based methods). This allows testing these methods locally despite the challenges with existing APIs and backends.
+
+
+**Example Usage:**
+
+```bash
+python explore_with_arcee_atlas.py --approach entropy_spike_beam_plugin --message "What is larger 9.9 or 9.11? Reason step by step before providing any answer."
+```
+
+
 ## Implemented techniques
 
 | Approach                | Slug               | Description                                                                                    |

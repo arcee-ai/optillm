@@ -185,7 +185,7 @@ Implementing advanced sampling techniques like entropy-based beam search is chal
 
 - **Efficiency with Backends:** Efficient inference backends like **VLLM** and **llama.cpp** are optimized for performance but may not support custom sampling methods or provide easy access to logits. Implementing custom sampling techniques in these backends is complex and may impact their performance benefits.
 
-To assist with research and experimentation when using a personal GPU (e.g., when running your proxy server in the cloud), a plugin has been implemented to test different sampling methods like entropy-based beam search. This plugin method is currently the best option and is working effectively. It uses PyTorch to load the model locally, providing access to model internals such as logits.
+To assist with sampling methods, a plugin has been implemented (entropy-based beam search). This plugin method is currently the best option and is working effectively. It uses PyTorch to load the model locally, providing access to model internals such as logits.
 
 **Important Note:** When using this method, it's essential to run the proxy server on a GPU to ensure acceptable performance; otherwise, it would be freaking slow.
 

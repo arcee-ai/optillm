@@ -175,7 +175,7 @@ To integrate with Arcee-Atlas, follow these steps:
 Different inference optimization techniques that can be used with Arcee-Atlas can be found in the [Implemented techniques](#implemented-techniques) section below.
 
 
-## Running Sampling Methods as Plugins [We need to access logits!!]
+## Running Sampling Methods (Entropy-based) as Plugins [We need to access logits!!]
 
 Implementing advanced sampling techniques like entropy-based beam search is challenging due to efficiency concerns and limitations in accessing model internals.
 
@@ -195,7 +195,7 @@ While this method is currently working using PyTorch, it would be beneficial in 
 **Example Usage:**
 
 ```bash
-python explore_with_arcee_atlas.py --approach entropy_spike_beam_plugin --message "What is larger 9.9 or 9.11? Reason step by step before providing any answer."
+python explore_sampling.py --approach entropy_spike_beam_plugin --message "What is larger 9.9 or 9.11? Reason step by step before providing any answer."
 ```
 
 ## Implemented techniques

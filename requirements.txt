@@ -19,3 +19,5 @@ nbformat
 nbconvert
 ipython
 ipykernel
+tqdm
+asyncclick

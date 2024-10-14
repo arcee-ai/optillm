@@ -29,7 +29,7 @@ async def entropy_spike_beam(
     tokenizer_name: str,
     messages: str,
     max_new_tokens: int = 512,
-    top_k: int = 20,
+    top_k: int = 50,
     temperature: float = 1.0,
     beam_width: int = 5,
     inference_endpoint: Optional[str] = None,
@@ -42,7 +42,7 @@ async def entropy_spike_beam(
         tokenizer_name: The associated tokenizer name.
         messages: List of chat messages in the format [{"role": "user", "content": "..."}]
         max_new_tokens: Maximum number of new tokens to generate.
-        top_k: The number of top tokens to consider at each step. (max 20 with openai client)
+        top_k: The number of top tokens to consider at each step.
         temperature: Sampling temperature.
         beam_width: The beam width (number of beams to keep).
         inference_endpoint: The inference endpoint to use, defaults to the arcee research endpoint
@@ -126,16 +126,16 @@ async def entropy_spike_beam(
 @click.option('--tokenizer_name', default='arcee-ai/SuperNova-Medius', help='The associated tokenizer name.')
 @click.option('--messages', required=True, help='List of chat messages in the format [{"role": "user", "content": "..."}]')
 @click.option('--max_new_tokens', default=1024, help='Maximum number of new tokens to generate.')
-@click.option('--top_k', default=20, help='The number of top tokens to consider at each step. (max 20 with openai client)')
+@click.option('--top_k', default=50, help='The number of top tokens to consider at each step.')
 @click.option('--temperature', default=1.0, help='Sampling temperature.')
 @click.option('--beam_width', default=5, help='The beam width (number of beams to keep).')
 @click.option('--inference_endpoint', default='https://models.research.arcee.ai/openai/v1', help='The inference endpoint to use, defaults to the arcee research endpoint')
 async def run_entropy_spike_beam(
     model_name: str,
     tokenizer_name: str,
-    messages: List[Dict[str, str]],
+    messages: str,
     max_new_tokens: int = 512,
-    top_k: int = 20,
+    top_k: int = 50,
     temperature: float = 1.0,
     beam_width: int = 5,
     inference_endpoint: Optional[str] = None,

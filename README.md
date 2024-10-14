@@ -198,6 +198,30 @@ While this method is currently working using PyTorch, it would be beneficial in 
 python explore_sampling.py --approach entropy_spike_beam_plugin --message "What is larger 9.9 or 9.11? Reason step by step before providing any answer."
 ```
 
+## Evaluate optillm with Arcee-Atlas
+To evaluate optillm with Arcee-Atlas, we provide a script to generate a dataset and another to evaluate the results.
+
+1. Generate the dataset:
+   The `scripts/gen_optillm_dataset_atlas.py` script will generate a JSON file for given inputs according to assigned methods. For example, to generate a dataset using the MCTS, Best-of-N, and CoT Reflection approaches:
+
+   ```bash
+   python scripts/gen_optillm_dataset_atlas.py --num_samples 100 --output_file optillm_dataset.jsonl --approaches mcts bon cot_reflection
+   ```
+
+   This will generate a JSON file containing responses from the specified approaches for each sample.
+
+2. Evaluate the results:
+   Once you have generated the JSON file, you can evaluate the results using the `eval_frames_benchmark.py` script:
+
+   ```bash
+   python scripts/eval_frames_benchmark.py --input_file optillm_dataset.jsonl --output_file evaluation_results.json
+   ```
+
+   This will analyze the generated dataset and produce an evaluation report.
+
+You can also use the following bash script to automate the process:
+
+
 ## Implemented techniques
 
 | Approach                | Slug               | Description                                                                                    |

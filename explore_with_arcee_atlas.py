@@ -11,19 +11,18 @@ def main():
     message = args.message
 
     # This is a dummy key that is compatible with the openai encription. 
-    OPENAI_KEY = "dummy key that follows the openai encription"
+    OPENAI_KEY = "sk-no_key"
     OPENAI_BASE_URL = "http://localhost:8000/v1"
     client = OpenAI(api_key=OPENAI_KEY, base_url=OPENAI_BASE_URL)
 
     response = client.chat.completions.create(
-      model="/workspace/Arcee-Atlas",
-      messages=[
-        {
-          "role": "user",
-          "content": f"<optillm_approach>{optillm_approach}</optillm_approach> {message}"
-        }
-      ],
-      temperature=0.2,
+        model=f"{optillm_approach}-/workspace/Arcee-Atlas",  # Assuming OptILM uses this naming convention
+        messages=[
+            {
+              "role": "user",
+              "content": message
+            }
+            ],
     )
 
     print(response)

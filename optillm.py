@@ -10,7 +10,6 @@ import importlib
 import glob
 import asyncio
 import re
-from concurrent.futures import ThreadPoolExecutor
 
 # Import the LiteLLM wrapper
 from optillm.litellm_wrapper import LiteLLMWrapper

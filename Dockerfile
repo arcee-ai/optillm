@@ -1,5 +1,5 @@
 # Build stage
-FROM python:3.12-slim AS builder
+FROM --platform=linux/amd64 python:3.12-slim AS builder
 
 # Set working directory
 WORKDIR /app
@@ -16,7 +16,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Final stage
-FROM python:3.12-slim
+FROM --platform=linux/amd64 python:3.12-slim
 
 # Install curl for the healthcheck
 RUN apt-get update && apt-get install -y --no-install-recommends \

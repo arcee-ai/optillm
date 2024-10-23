@@ -4,8 +4,8 @@ openai
 z3-solver
 aiohttp
 flask
-torch
-transformers
+#torch
+#transformers
 azure.identity
 tiktoken
 scikit-learn
@@ -19,3 +19,4 @@ nbformat
 nbconvert
 ipython
 ipykernel
+sympy
